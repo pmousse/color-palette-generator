@@ -1,5 +1,11 @@
 @import "tailwindcss";
-
+@theme {
+  --color-palette-1: #1bc0b5;
+  --color-palette-2: #29bfe0;
+  --color-palette-3: #1868a5;
+  --color-palette-4: #3b70e3;
+  --color-palette-5: #2d39e1;
+}
 body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;

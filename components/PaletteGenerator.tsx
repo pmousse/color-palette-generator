@@ -274,7 +274,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
               <div className="flex-1">
                 <div className="h-4 bg-gray-200 rounded animate-pulse w-20 mb-2"></div>
                 <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
+                  <div className="w-10 h-10 bg-palette-1 rounded-lg animate-pulse"></div>
                   <div className="flex-1 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
                 </div>
               </div>
@@ -294,7 +294,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {Array.from({ length: 5 }, (_, i) => (
               <div key={i} className="bg-white rounded-2xl shadow-lg p-4 space-y-3">
-                <div className="h-24 bg-gray-200 rounded-lg animate-pulse"></div>
+                <div className={`h-24 rounded-lg animate-pulse`} style={{ backgroundColor: `var(--color-palette-${i + 1})` }}></div>
                 <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
                 <div className="h-4 bg-gray-200 rounded animate-pulse w-1/2"></div>
               </div>
@@ -304,7 +304,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
       ) : (
         <>
         {/* Controls */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4">
+        <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4 border-l-4" style={{ borderLeftColor: "#1bc0b5" }}>
           {/* Seed color and harmony mode */}
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Seed color */}
@@ -315,7 +315,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
             <div className="flex items-center gap-2">
               <input
                 type="color"
-                value={seedColor ? `#${seedColor}` : "#4F46E5"}
+                value={seedColor ? `#${seedColor}` : "#1bc0b5"}
                 onChange={(e) => setSeedColor(e.target.value.replace(/^#/, ""))}
                 className="w-10 h-10 rounded-lg border border-gray-300 cursor-pointer"
                 aria-label="Pick a seed color"
@@ -326,8 +326,8 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
                 value={seedColor}
                 onChange={handleSeedChange}
                 onKeyDown={handleSeedKeyPress}
-                placeholder="HEX (e.g., 4F46E5)"
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                placeholder="HEX (e.g., 1bc0b5)"
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-palette-1 focus:border-palette-1 text-sm"
               />
             </div>
           </div>
@@ -341,7 +341,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
               id="harmony-mode"
               value={harmonyMode}
               onChange={(e) => setHarmonyMode(e.target.value as HarmonyMode)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-palette-1 focus:border-palette-1 text-sm"
             >
               {harmonyModes.map((mode) => (
                 <option key={mode.value} value={mode.value}>
@@ -360,7 +360,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
               id="palette-size"
               value={paletteSize}
               onChange={(e) => setPaletteSize(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-palette-1 focus:border-palette-1 text-sm"
             >
               <option value={3}>3 colors</option>
               <option value={5}>5 colors</option>
@@ -369,38 +369,19 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
           </div>
         </div>
 
-        {/* Action buttons */}
+        {/* Primary action buttons */}
         <div className="flex flex-wrap gap-3">
           <button
             onClick={handleGenerate}
-            className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+            className="px-6 py-2.5 bg-palette-1 text-white rounded-lg font-medium hover:bg-palette-2 focus:ring-2 focus:ring-palette-1 focus:ring-offset-2 transition-colors"
           >
             Generate palette
           </button>
           <button
             onClick={handleRandomize}
-            className="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors"
+            className="px-6 py-2.5 bg-palette-2 text-white rounded-lg font-medium hover:bg-palette-3 focus:ring-2 focus:ring-palette-2 focus:ring-offset-2 transition-colors"
           >
             Randomize
-          </button>
-          <button
-            onClick={() => setShowContrast(true)}
-            className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
-          >
-            Check contrast
-          </button>
-          <button
-            onClick={handleSave}
-            disabled={!savingAvailable}
-            className="px-4 py-2.5 text-gray-600 rounded-lg font-medium hover:bg-gray-100 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors text-sm"
-          >
-            Save palette
-          </button>
-          <button
-            onClick={() => setShowExport(true)}
-            className="px-4 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors text-sm"
-          >
-            Export
           </button>
         </div>
 
@@ -420,7 +401,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
         )}
 
         {/* Trust badges */}
-        <div className="flex flex-wrap gap-4 text-xs text-gray-400">
+        <div className="flex flex-wrap gap-4 text-xs text-gray-400 p-4 rounded-lg bg-gray-50 border-l-4" style={{ borderLeftColor: "#29bfe0" }}>
           <span className="flex items-center gap-1">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path
@@ -455,7 +436,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
       </div>
 
       {/* Palette cards */}
-      <div className="space-y-6">
+      <div className="space-y-6 p-6 bg-white rounded-2xl shadow-lg border-l-4" style={{ borderLeftColor: "#1868a5" }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
           {palette.map((color, index) => (
             <ColorCard
@@ -473,6 +454,29 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
         <p className="text-xs text-gray-400 text-center">
           Contrast guidance is a helpful starting point, not a full accessibility audit.
         </p>
+
+        {/* Secondary action buttons */}
+        <div className="flex flex-wrap gap-3 justify-end">
+          <button
+            onClick={() => setShowContrast(true)}
+            className="px-6 py-2.5 bg-palette-3 text-white rounded-lg font-medium hover:bg-palette-4 focus:ring-2 focus:ring-palette-3 focus:ring-offset-2 transition-colors"
+          >
+            Check contrast
+          </button>
+          <button
+            onClick={handleSave}
+            disabled={!savingAvailable}
+            className="px-4 py-2.5 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors text-sm"
+          >
+            Save palette
+          </button>
+          <button
+            onClick={() => setShowExport(true)}
+            className="px-4 py-2.5 bg-palette-4 text-white rounded-lg font-medium hover:bg-palette-5 focus:ring-2 focus:ring-palette-4 focus:ring-offset-2 transition-colors text-sm"
+          >
+            Export
+          </button>
+        </div>
       </div>
 
       {/* Export Modal */}
@@ -483,7 +487,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
             if (e.target === e.currentTarget) setShowExport(false);
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl w-3/4 h-3/4 max-h-[90vh] overflow-hidden flex flex-col">
+          <div className="bg-white rounded-2xl shadow-2xl w-3/4 h-3/4 max-h-[90vh] overflow-hidden flex flex-col border-l-4" style={{ borderLeftColor: "#3b70e3" }}>
             <div className="flex items-center justify-between p-6 border-b border-gray-200 flex-shrink-0">
               <h3 className="text-xl font-semibold text-gray-900">Export your palette</h3>
               <button
@@ -511,7 +515,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
             if (e.target === e.currentTarget) setShowContrast(false);
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl w-3/4 h-3/4 max-h-[90vh] overflow-hidden flex flex-col">
+          <div className="bg-white rounded-2xl shadow-2xl w-3/4 h-3/4 max-h-[90vh] overflow-hidden flex flex-col border-l-4" style={{ borderLeftColor: "#2d39e1" }}>
             <div className="flex items-center justify-between p-6 border-b border-gray-200 flex-shrink-0">
               <h3 className="text-xl font-semibold text-gray-900">Contrast check</h3>
               <button

@@ -14,9 +14,9 @@ export default function Header() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="10" cy="16" r="8" fill="#4F46E5" />
-            <circle cx="22" cy="16" r="8" fill="#EC4899" />
-            <circle cx="16" cy="10" r="8" fill="#10B981" />
+            <circle cx="10" cy="16" r="8" fill="#1bc0b5" />
+            <circle cx="22" cy="16" r="8" fill="#29bfe0" />
+            <circle cx="16" cy="10" r="8" fill="#1868a5" />
           </svg>
           <span className="text-lg font-bold text-gray-900">Color Palette Generator</span>
         </Link>

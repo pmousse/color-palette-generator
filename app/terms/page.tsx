@@ -4,27 +4,27 @@ export default function Terms() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Terms of Service</h1>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8 space-y-6 text-gray-600">
-          <p>
+        <div className="bg-white rounded-2xl shadow-lg p-8 space-y-6 text-gray-600 border-l-4 border-palette-3">
+          <p className="text-sm text-gray-500">
             Last updated: {new Date().toLocaleDateString()}
           </p>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Acceptance of Terms</h2>
+            <h2 className="text-xl font-semibold text-palette-3 mb-3">Acceptance of Terms</h2>
             <p>
               By using Color Palette Generator, you agree to these terms of service. If you do not agree, please do not use the tool.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Use of the Tool</h2>
+            <h2 className="text-xl font-semibold text-palette-4 mb-3">Use of the Tool</h2>
             <p>
               Color Palette Generator is provided for general creative and design use. The tool generates color combinations based on color theory principles and randomization.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">No Warranty</h2>
+            <h2 className="text-xl font-semibold text-palette-5 mb-3">No Warranty</h2>
             <p>
               The tool is provided "as is" without any warranties, expressed or implied. We do not guarantee that:
             </p>
@@ -38,7 +38,7 @@ export default function Terms() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">User Responsibility</h2>
+            <h2 className="text-xl font-semibold text-palette-1 mb-3">User Responsibility</h2>
             <p>
               You are responsible for:
             </p>
@@ -51,21 +51,21 @@ export default function Terms() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Intellectual Property</h2>
+            <h2 className="text-xl font-semibold text-palette-2 mb-3">Intellectual Property</h2>
             <p>
               Generated color palettes are not exclusive intellectual property. You are free to use them for personal, commercial, or any type of project without attribution or restrictions.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Accessibility Disclaimer</h2>
+            <h2 className="text-xl font-semibold text-palette-3 mb-3">Accessibility Disclaimer</h2>
             <p>
               The contrast guidance and accessibility labels provided by this tool are simplified estimates. They should not be considered a substitute for professional accessibility testing in your specific design context.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Changes to Terms</h2>
+            <h2 className="text-xl font-semibold text-palette-4 mb-3">Changes to Terms</h2>
             <p>
               We may update these terms from time to time. Continued use of the tool after changes constitutes acceptance of the new terms.
             </p>
