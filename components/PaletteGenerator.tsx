@@ -400,10 +400,10 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
             Save palette
           </button>
           <button
-            onClick={() => setShowExport(!showExport)}
+            onClick={() => setShowExport(true)}
             className="px-4 py-2.5 text-indigo-600 rounded-lg font-medium hover:bg-indigo-50 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors text-sm"
           >
-            {showExport ? "Hide" : "Export"}
+            Export
           </button>
         </div>
 
@@ -477,16 +477,39 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
           <ContrastCheck colors={palette} />
         )}
 
-        {/* Export panel */}
-        {showExport && (
-          <ExportPanel colors={palette} />
-        )}
-
         {/* Accessibility disclaimer */}
         <p className="text-xs text-gray-400 text-center">
           Contrast guidance is a helpful starting point, not a full accessibility audit.
         </p>
       </div>
+
+      {/* Export Modal */}
+      {showExport && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowExport(false);
+          }}
+        >
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h3 className="text-xl font-semibold text-gray-900">Export your palette</h3>
+              <button
+                onClick={() => setShowExport(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+                aria-label="Close modal"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 80px)' }}>
+              <ExportPanel colors={palette} />
+            </div>
+          </div>
+        </div>
+      )}
         </>
       )}
     </div>
