@@ -401,7 +401,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
           </button>
           <button
             onClick={() => setShowExport(true)}
-            className="px-4 py-2.5 text-indigo-600 rounded-lg font-medium hover:bg-indigo-50 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors text-sm"
+            className="px-4 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors text-sm"
           >
             Export
           </button>
@@ -491,8 +491,8 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
             if (e.target === e.currentTarget) setShowExport(false);
           }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <div className="bg-white rounded-2xl shadow-2xl w-3/4 h-3/4 max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 flex-shrink-0">
               <h3 className="text-xl font-semibold text-gray-900">Export your palette</h3>
               <button
                 onClick={() => setShowExport(false)}
@@ -504,7 +504,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
                 </svg>
               </button>
             </div>
-            <div className="p-6 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 80px)' }}>
+            <div className="p-6 overflow-y-auto flex-1">
               <ExportPanel colors={palette} />
             </div>
           </div>
