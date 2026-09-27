@@ -37,6 +37,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
   const [saveMessage, setSaveMessage] = useState("");
   const [savingAvailable, setSavingAvailable] = useState(true);
   const [showExport, setShowExport] = useState(false);
+  const [showContrast, setShowContrast] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [generationCounter, setGenerationCounter] = useState(0);
   const prevPaletteSizeRef = useRef(5);
@@ -229,10 +230,6 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
     setTimeout(() => setSaveMessage(""), 3000);
   };
 
-  const handleClearLocks = () => {
-    setLockedColors(Array(paletteSize).fill(false));
-  };
-
   const handleSeedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSeedColor(e.target.value.replace(/^#/, ""));
   };
@@ -387,10 +384,10 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
             Randomize
           </button>
           <button
-            onClick={handleClearLocks}
-            className="px-4 py-2.5 text-gray-600 rounded-lg font-medium hover:bg-gray-100 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors text-sm"
+            onClick={() => setShowContrast(true)}
+            className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
           >
-            Clear locks
+            Check contrast
           </button>
           <button
             onClick={handleSave}
@@ -472,11 +469,6 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
           ))}
         </div>
 
-        {/* Contrast check */}
-        {palette.length >= 2 && (
-          <ContrastCheck colors={palette} />
-        )}
-
         {/* Accessibility disclaimer */}
         <p className="text-xs text-gray-400 text-center">
           Contrast guidance is a helpful starting point, not a full accessibility audit.
@@ -506,6 +498,34 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
             </div>
             <div className="p-6 overflow-y-auto flex-1">
               <ExportPanel colors={palette} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Contrast Check Modal */}
+      {showContrast && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowContrast(false);
+          }}
+        >
+          <div className="bg-white rounded-2xl shadow-2xl w-3/4 h-3/4 max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 flex-shrink-0">
+              <h3 className="text-xl font-semibold text-gray-900">Contrast check</h3>
+              <button
+                onClick={() => setShowContrast(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+                aria-label="Close modal"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6 overflow-y-auto flex-1">
+              <ContrastCheck colors={palette} />
             </div>
           </div>
         </div>
