@@ -40,7 +40,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
   const [isLoading, setIsLoading] = useState(true);
   const [generationCounter, setGenerationCounter] = useState(0);
   const prevPaletteSizeRef = useRef(5);
-  const generateNewPaletteRef = useRef<() => void>();
+  const generateNewPaletteRef = useRef<(() => void) | undefined>(undefined);
   const hasInitialized = useRef(false);
   const seedColorRef = useRef("");
 
