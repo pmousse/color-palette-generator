@@ -64,11 +64,20 @@ export const metadata: Metadata = {
       ? process.env.NEXT_PUBLIC_SITE_URL
       : "https://color-palette-generator.example.com"
   ),
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} font-sans antialiased`}>
+      <head>
+        <meta name="theme-color" content="#4F46E5" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Color Palette" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+      </head>
       <body className="min-h-full flex flex-col bg-slate-50">
         <ErrorBoundary>
           <Header />
