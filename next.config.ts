@@ -6,13 +6,18 @@ const withPWA = require("next-pwa")({
   disable: process.env.NODE_ENV === "development",
 });
 
+const isExport = process.env.NODE_ENV === "production" && process.env.EXPORT_MODE === "true";
+
 const nextConfig: NextConfig = {
   turbopack: {},
-  output: "export",
-  basePath: process.env.BASE_PATH || undefined,
+  output: isExport ? "export" : undefined,
+  basePath: isExport ? (process.env.BASE_PATH || undefined) : undefined,
   images: {
     unoptimized: true,
   },
 };
 
-export default withPWA(nextConfig);
+// Only apply PWA when not doing static export
+const config = isExport ? nextConfig : withPWA(nextConfig);
+
+export default config;
