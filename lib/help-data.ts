@@ -77,7 +77,7 @@ export const helpSections: HelpSection[] = [
       },
       {
         question: "How many colors are in each palette?",
-        answer: "Each palette contains exactly 5 colors. This is a versatile number that works well for most design projects — primary, secondary, accent, and neutral colors.",
+        answer: "Each palette can contain 3, 5, or 7 colors. You can choose your preferred palette size using the 'Colors' selector above the generator. This flexibility lets you adapt the palette to your project's needs — from simple 3-color schemes to more detailed 7-color combinations.",
       },
     ],
   },

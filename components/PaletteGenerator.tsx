@@ -589,8 +589,6 @@ function ExportPanel({ colors }: { colors: string[] }) {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900">Export your palette</h3>
-
       {/* Tabs */}
       <div className="flex flex-wrap gap-2">
         {tabs.map((tab) => (

@@ -65,63 +65,66 @@ export default function ContrastCheck({ colors }: ContrastCheckProps) {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 space-y-6">
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        <div>
-          <h3 className="text-xl font-bold text-gray-900">Contrast check</h3>
-          <p className="text-sm text-gray-600 mt-1">
-            Compare any two palette colors and get WCAG-style guidance in plain language.
-          </p>
-        </div>
-        <div
-          className="px-3 py-1.5 rounded-lg text-sm font-medium"
-          style={{
-            backgroundColor: `${colors[backgroundIndex]}20`,
-            color: colors[backgroundIndex],
-          }}
-        >
-          {contrastInfo.ratioNumber >= 4.5 ? "Pass AA normal text" : "Fail AA normal text"}
-        </div>
-      </div>
-
       {/* Color selectors */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Foreground - exclude selected background */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Foreground</label>
-          <select
-            value={foregroundIndex}
-            onChange={(e) => handleForegroundChange(parseInt(e.target.value))}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-          >
+          <div className="flex flex-wrap gap-2">
             {colors
               .map((color, index) => ({ color, index }))
               .filter(({ index }) => index !== backgroundIndex)
               .map(({ color, index: originalIndex }, filteredIndex) => (
-                <option key={filteredIndex} value={originalIndex}>
-                  Color {originalIndex + 1} #{color.replace("#", "")}
-                </option>
+                <button
+                  key={filteredIndex}
+                  onClick={() => handleForegroundChange(originalIndex)}
+                  className={`w-12 h-12 rounded-lg border-2 transition-all duration-200 ${
+                    foregroundIndex === originalIndex
+                      ? "border-gray-900 ring-2 ring-gray-400 ring-offset-2"
+                      : "border-gray-200 hover:border-gray-400"
+                  }`}
+                  style={{ backgroundColor: color }}
+                  aria-label={`Select color ${originalIndex + 1} ${color}`}
+                  title={`Color ${originalIndex + 1} ${color}`}
+                >
+                  {foregroundIndex === originalIndex && (
+                    <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </button>
               ))}
-          </select>
+          </div>
         </div>
 
         {/* Background - exclude selected foreground */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Background</label>
-          <select
-            value={backgroundIndex}
-            onChange={(e) => handleBackgroundChange(parseInt(e.target.value))}
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-          >
+          <div className="flex flex-wrap gap-2">
             {colors
               .map((color, index) => ({ color, index }))
               .filter(({ index }) => index !== foregroundIndex)
               .map(({ color, index: originalIndex }, filteredIndex) => (
-                <option key={filteredIndex} value={originalIndex}>
-                  Color {originalIndex + 1} #{color.replace("#", "")}
-                </option>
+                <button
+                  key={filteredIndex}
+                  onClick={() => handleBackgroundChange(originalIndex)}
+                  className={`w-12 h-12 rounded-lg border-2 transition-all duration-200 ${
+                    backgroundIndex === originalIndex
+                      ? "border-gray-900 ring-2 ring-gray-400 ring-offset-2"
+                      : "border-gray-200 hover:border-gray-400"
+                  }`}
+                  style={{ backgroundColor: color }}
+                  aria-label={`Select color ${originalIndex + 1} ${color}`}
+                  title={`Color ${originalIndex + 1} ${color}`}
+                >
+                  {backgroundIndex === originalIndex && (
+                    <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </button>
               ))}
-          </select>
+          </div>
         </div>
       </div>
 
