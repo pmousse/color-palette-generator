@@ -486,7 +486,7 @@ export default function PaletteGenerator({ initialPalette }: PaletteGeneratorPro
       {/* Export Modal */}
       {showExport && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
           onClick={(e) => {
             if (e.target === e.currentTarget) setShowExport(false);
           }}
