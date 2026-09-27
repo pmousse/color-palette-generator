@@ -8,6 +8,11 @@ const withPWA = require("next-pwa")({
 
 const nextConfig: NextConfig = {
   turbopack: {},
+  output: "export",
+  basePath: process.env.BASE_PATH || undefined,
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default withPWA(nextConfig);
